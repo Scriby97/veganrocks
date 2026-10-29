@@ -94,10 +94,10 @@ Seit über zehn Jahren zeigt Bettina, wie einfach, kreativ und genussvoll die ve
     },
   ]),
   videos: items([
-    { title: "10 Jahre Veganrocks – Kochschule & Events", url: "https://youtu.be/ofx2UaHCnEw" },
-    { title: "Veganer Kochkurs by Veganrocks", url: "https://youtu.be/l_wJAr9K5oA" },
-    { title: "Vegane Grill-Rezepte auf dem Ofyr: Auberginen und Blumenkohlsteak", url: "https://youtu.be/TVBD1RgnXEs" },
-    { title: "Vegan grilling für Outdoor-Fans", url: "https://youtu.be/AOAsuqhk4PI" },
+    { title: "10 Jahre Veganrocks – Kochschule & Events", url: "https://youtu.be/ofx2UaHCnEw", thumbnail: img("video-ofx2UaHCnEw.jpg", "") },
+    { title: "Veganer Kochkurs by Veganrocks", url: "https://youtu.be/l_wJAr9K5oA", thumbnail: img("video-l_wJAr9K5oA.jpg", "") },
+    { title: "Vegane Grill-Rezepte auf dem Ofyr: Auberginen und Blumenkohlsteak", url: "https://youtu.be/TVBD1RgnXEs", thumbnail: img("video-TVBD1RgnXEs.jpg", "") },
+    { title: "Vegan grilling für Outdoor-Fans", url: "https://youtu.be/AOAsuqhk4PI", thumbnail: img("video-AOAsuqhk4PI.jpg", "") },
   ]),
 
   galleryTitle: "Kochevents, Fotos & Impressionen",
@@ -408,8 +408,8 @@ Alles gut verrühren. Passt zu jeglichem Grillgut für Grill oder Tischgrill. Am
     cards: [],
     images: [],
     videos: items([
-      { title: "Vegane Grill-Rezepte auf dem Ofyr: Auberginen und Blumenkohlsteak", url: "https://youtu.be/TVBD1RgnXEs" },
-      { title: "Vegan grilling für Outdoor-Fans", url: "https://youtu.be/AOAsuqhk4PI" },
+      { title: "Vegane Grill-Rezepte auf dem Ofyr: Auberginen und Blumenkohlsteak", url: "https://youtu.be/TVBD1RgnXEs", thumbnail: img("video-TVBD1RgnXEs.jpg", "") },
+      { title: "Vegan grilling für Outdoor-Fans", url: "https://youtu.be/AOAsuqhk4PI", thumbnail: img("video-AOAsuqhk4PI.jpg", "") },
     ]),
     showTestimonials: false,
     cta: null,

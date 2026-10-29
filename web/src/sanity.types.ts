@@ -15,6 +15,21 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type Thumbnail = {
+  asset?: SanityImageAssetReference;
+  media?: unknown; // Unable to locate the referenced type "media" in schema
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
+
 export type RichText = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -33,13 +48,6 @@ export type RichText = Array<{
   _type: "block";
   _key: string;
 }>;
-
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
 
 export type Product = {
   _id: string;
@@ -177,6 +185,7 @@ export type SiteSettings = {
   videos?: Array<{
     title: string;
     url: string;
+    thumbnail?: Thumbnail;
     _key: string;
   }>;
   galleryTitle?: string;
@@ -275,6 +284,7 @@ export type Page = {
   videos?: Array<{
     title: string;
     url: string;
+    thumbnail?: Thumbnail;
     _key: string;
   }>;
   showTestimonials?: boolean;
@@ -388,8 +398,9 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | RichText
   | SanityImageAssetReference
+  | Thumbnail
+  | RichText
   | Product
   | SanityImageCrop
   | SanityImageHotspot
@@ -485,6 +496,7 @@ export type SETTINGS_QUERY_RESULT = {
   videos?: Array<{
     title: string;
     url: string;
+    thumbnail?: Thumbnail;
     _key: string;
   }>;
   galleryTitle?: string;
@@ -582,6 +594,7 @@ export type PAGES_QUERY_RESULT = Array<{
   videos: Array<{
     title: string;
     url: string;
+    thumbnail?: Thumbnail;
     _key: string;
   }> | null;
   showTestimonials: boolean | false;

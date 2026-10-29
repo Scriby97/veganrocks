@@ -1,6 +1,7 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {altText} from './altText'
 import {facts} from './facts'
+import {video} from './video'
 
 // Adressen, die die Website selbst braucht – eine Seite darf sie nicht belegen
 const reservedSlugs = ['shop', 'warenkorb', 'galerie', 'ueber-mich', 'kontakt', 'impressum', 'datenschutz', 'agb', 'api', 'preview']
@@ -91,22 +92,7 @@ export const page = defineType({
       title: 'YouTube-Videos',
       type: 'array',
       group: 'more',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          fields: [
-            defineField({name: 'title', title: 'Titel', type: 'string', validation: (r) => r.required()}),
-            defineField({
-              name: 'url',
-              title: 'YouTube-Link',
-              description: 'Link aus YouTube kopieren, z. B. https://youtu.be/AOAsuqhk4PI',
-              type: 'url',
-              validation: (r) => r.required(),
-            }),
-          ],
-          preview: {select: {title: 'title', subtitle: 'url'}},
-        }),
-      ],
+      of: [video],
     }),
     defineField({
       name: 'showTestimonials',

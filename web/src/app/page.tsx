@@ -4,7 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { RichText } from "@/components/RichText";
 import { SanityImage } from "@/components/SanityImage";
 import { YouTube } from "@/components/YouTube";
-import { getProducts, getSettings, youtubeId } from "@/lib/sanity";
+import { getProducts, getSettings, imageUrl, youtubeId } from "@/lib/sanity";
 
 export default async function HomePage() {
   const [settings, products] = await Promise.all([getSettings(), getProducts()]);
@@ -12,7 +12,7 @@ export default async function HomePage() {
   const featured = products.filter((p) => p.available).slice(0, 3);
   const videos = (settings.videos ?? []).flatMap((v) => {
     const id = youtubeId(v.url);
-    return id ? [{ ...v, id }] : [];
+    return id ? [{ ...v, id, thumb: imageUrl(v.thumbnail, { width: 1280, height: 720 }) }] : [];
   });
 
   return (
@@ -128,11 +128,11 @@ export default async function HomePage() {
           </SectionHeading>
           <div className="grid gap-5 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <YouTube id={videos[0].id} title={videos[0].title} large />
+              <YouTube id={videos[0].id} title={videos[0].title} thumbnail={videos[0].thumb} large />
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
               {videos.slice(1, 3).map((v) => (
-                <YouTube key={v._key} id={v.id} title={v.title} />
+                <YouTube key={v._key} id={v.id} title={v.title} thumbnail={v.thumb} />
               ))}
             </div>
           </div>

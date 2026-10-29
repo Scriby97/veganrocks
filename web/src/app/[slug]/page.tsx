@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CtaBand, Facts, ImageRow, PageHero, SectionHeading, Testimonials } from "@/components/Blocks";
 import { RichText } from "@/components/RichText";
 import { YouTube } from "@/components/YouTube";
-import { getPages, getSettings, youtubeId } from "@/lib/sanity";
+import { getPages, getSettings, imageUrl, youtubeId } from "@/lib/sanity";
 
 // Inhaltsseiten aus dem Studio (Kochkurse, Team-Events, Einkaufstipps, …) – beim Build als statische Seiten erzeugt
 export const dynamicParams = false;
@@ -27,7 +27,7 @@ export default async function ContentPage({ params }: PageProps<"/[slug]">) {
   if (!page) notFound();
   const videos = (page.videos ?? []).flatMap((v) => {
     const id = youtubeId(v.url);
-    return id ? [{ ...v, id }] : [];
+    return id ? [{ ...v, id, thumb: imageUrl(v.thumbnail, { width: 1280, height: 720 }) }] : [];
   });
 
   return (
@@ -65,7 +65,7 @@ export default async function ContentPage({ params }: PageProps<"/[slug]">) {
             <SectionHeading title="Videos" />
             <div className="grid gap-5 md:grid-cols-2">
               {videos.map((v) => (
-                <YouTube key={v._key} id={v.id} title={v.title} />
+                <YouTube key={v._key} id={v.id} title={v.title} thumbnail={v.thumb} />
               ))}
             </div>
           </section>

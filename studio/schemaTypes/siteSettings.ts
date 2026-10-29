@@ -1,6 +1,7 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {altText} from './altText'
 import {facts} from './facts'
+import {video} from './video'
 
 const image = (name: string, title: string, group: string, description?: string) =>
   defineField({name, title, description, type: 'image', options: {hotspot: true}, fields: [altText], group})
@@ -136,16 +137,7 @@ export const siteSettings = defineType({
       description: 'YouTube-Links. Das erste Video erscheint gross.',
       type: 'array',
       group: 'voices',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          fields: [
-            defineField({name: 'title', title: 'Titel', type: 'string', validation: (r) => r.required()}),
-            defineField({name: 'url', title: 'YouTube-Link', type: 'url', validation: (r) => r.required()}),
-          ],
-          preview: {select: {title: 'title', subtitle: 'url'}},
-        }),
-      ],
+      of: [video],
     }),
 
     defineField({name: 'galleryTitle', title: 'Titel', type: 'string', group: 'gallery'}),
