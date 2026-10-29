@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  /* Farben aus dem Logo (Magenta/Aubergine), dazu ein Blattgrün und warmes Creme.
+     Text- und Akzentfarben erreichen mind. 4.5:1 Kontrast auf Creme und Weiss (WCAG AA). */
+  --color-cream: #fbf7f3;
+  --color-blush: #f8edf4;
+  --color-line: #eadde5;
+  --color-ink: #1f1424;
+  --color-muted: #5f5464;
+  --color-accent: #a4126f;
+  --color-accent-dark: #7c0d54;
+  --color-plum: #2e0f33;
+  --color-plum-light: #4a1a50;
+  --color-leaf: #4c7a2a;
+  --color-sun: #f4c35a;
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+/* Anker-Links nicht unter die fixierte Kopfzeile scrollen */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Grosse Titel: Zeilen gleichmässig umbrechen */
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+/* Knöpfe und Überzeile – eigene Hilfsklassen (Tailwind 4: @utility statt @layer components) */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+@utility btn-primary {
+  @apply btn bg-accent text-white hover:bg-accent-dark focus-visible:outline-accent;
+}
+@utility btn-light {
+  @apply btn bg-white text-plum hover:bg-blush focus-visible:outline-white;
+}
+@utility btn-outline {
+  @apply btn border-2 border-current text-accent hover:border-accent hover:bg-accent hover:text-white;
+}
+@utility eyebrow {
+  @apply text-sm font-semibold uppercase tracking-[0.14em] text-accent;
+}

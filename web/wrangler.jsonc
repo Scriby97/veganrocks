@@ -1,0 +1,24 @@
+// Cloudflare Worker: liefert die statische Seite aus `out/` aus; worker/index.ts beantwortet zusätzlich
+// /api/seats (freie Plätze nach Buchungen herunterzählen), leitet alte Wix-Adressen um und meldet
+// fehlgeschlagene Builds per ntfy. Secrets SANITY_WRITE_TOKEN und NTFY_TOPIC im Cloudflare-Dashboard setzen
+// (Settings → Variables and Secrets), SANITY_PROJECT_ID unten nach dem Anlegen des Sanity-Projekts eintragen.
+{
+  "name": "veganrocks",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  // Worker zuerst fragen, damit alte Adressen umgeleitet werden, bevor Cloudflare eine 404-Seite liefert
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    // /shop → shop.html
+    "html_handling": "auto-trailing-slash",
+    // unbekannte Adressen → out/404.html
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/home", "/individuellekochkurse", "/teamevent", "/firmenevents", "/food", "/videos", "/wildkr*", "/info", "/medien", "/gutscheine", "/product-page/*"]
+  },
+  "vars": {
+    "SANITY_PROJECT_ID": "TODO"
+  }
+  // Build-Benachrichtigung per ntfy: nach dem Anlegen der Queue «veganrocks-builds» im Dashboard einschalten:
+  // "queues": { "consumers": [{ "queue": "veganrocks-builds", "max_batch_size": 10, "max_batch_timeout": 5 }] }
+}
