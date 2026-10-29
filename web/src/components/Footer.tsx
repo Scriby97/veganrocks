@@ -70,7 +70,8 @@ export function Footer({ settings, offerLinks, moreLinks }: { settings: SiteSett
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} {settings.siteName ?? "Veganrocks"}</p>
+          {/* Gegründet 2014; das aktuelle Jahr kommt vom letzten Build (jede Änderung im Studio baut neu) */}
+          <p>© 2014–{new Date().getFullYear()} {settings.siteName ?? "Veganrocks"}</p>
           <nav aria-label="Rechtliches" className="flex gap-5">
             {legal.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-white">
