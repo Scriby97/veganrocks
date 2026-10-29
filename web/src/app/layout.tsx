@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MaintenanceGate } from "@/components/MaintenanceGate";
 import { buildNav, footerPages, isGroup } from "@/lib/nav";
-import { getPages, getProducts, getSettings } from "@/lib/sanity";
+import { getPages, getProducts, getSettings, imageUrl } from "@/lib/sanity";
 import "./globals.css";
 
 // Token aus Cloudflare → Web Analytics (öffentlich, steht ohnehin im HTML). Leer = keine Statistik.
@@ -19,12 +19,16 @@ const siteUrl = "https://veganrocks.ch";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   const siteName = settings.siteName ?? "Veganrocks";
+  // Bild beim Teilen (WhatsApp, Facebook, …) vom Sanity-CDN: funktioniert auf jeder Adresse (auch workers.dev).
+  // Ohne Bild im Studio: /og.jpg der Website
+  const shareImage = imageUrl(settings.shareImage, { width: 1200, height: 630 }) ?? "/og.jpg";
   return {
     title: { default: `${siteName} – vegane Kochkurse & Events im Aargau`, template: `%s | ${siteName}` },
     description: settings.heroText,
     metadataBase: new URL(siteUrl),
     alternates: { canonical: "./" },
-    openGraph: { images: [{ url: "/og.jpg", width: 1200, height: 630 }], locale: "de_CH", siteName, type: "website" },
+    openGraph: { images: [{ url: shareImage, width: 1200, height: 630, alt: siteName }], locale: "de_CH", siteName, type: "website" },
+    twitter: { card: "summary_large_image" },
   };
 }
 

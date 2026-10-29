@@ -118,6 +118,13 @@ export type SiteSettings = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  shareImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   heroEyebrow?: string;
   heroTitle?: string;
   heroText?: string;
@@ -413,6 +420,13 @@ export type SETTINGS_QUERY_RESULT = {
   previewPassword?: string;
   siteName?: string;
   logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  shareImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;

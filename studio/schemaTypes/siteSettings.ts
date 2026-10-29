@@ -56,6 +56,14 @@ export const siteSettings = defineType({
       group: 'home',
     }),
     defineField({
+      name: 'shareImage',
+      title: 'Bild beim Teilen',
+      description:
+        'Erscheint, wenn jemand die Website z. B. per WhatsApp teilt. Querformat 1200 × 630 Pixel, unter 300 KB (sonst zeigt WhatsApp kein Bild). Seiten von Shop-Angeboten zeigen stattdessen das Bild des Angebots.',
+      type: 'image',
+      group: 'home',
+    }),
+    defineField({
       name: 'heroEyebrow',
       title: 'Kleine Überzeile',
       description: 'z. B. «Vegane Kochkurse & Events im Aargau».',

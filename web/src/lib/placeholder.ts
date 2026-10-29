@@ -23,6 +23,7 @@ export const placeholderSettings: SiteSettings = {
   maintenanceText: "Hier wird gerade umgebaut – bald geht’s weiter. Let’s rock the kitchen!",
   siteName: "Veganrocks",
   logo: img("logo.png", "Veganrocks, est. 2014"),
+  shareImage: img("teilen.jpg", "Veganrocks – vegane Kochkurse & Events im Aargau"),
   heroEyebrow: "Vegane Kochkurse & Events · Aargau und ganze Schweiz",
   heroTitle: "Vegan kochen mit einer Prise Rock ’n’ Roll",
   heroText:
