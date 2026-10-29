@@ -2,8 +2,8 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 
-// Project ID kommt nach dem Anlegen des Sanity-Projekts hierher (und in sanity.cli.ts, web/.env.local)
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'TODO'
+// Sanity-Projekt «Veganrocks» im Konto von Nicolas (Bettina als Mitglied eingeladen)
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'fcu12z7m'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
 // Einstellungen gibt es genau einmal – kein "Neu erstellen"/"Löschen" dafür

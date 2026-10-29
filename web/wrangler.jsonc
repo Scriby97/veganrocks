@@ -17,7 +17,7 @@
     "run_worker_first": ["/api/*", "/home", "/individuellekochkurse", "/teamevent", "/firmenevents", "/food", "/videos", "/wildkr*", "/info", "/medien", "/gutscheine", "/product-page/*"]
   },
   "vars": {
-    "SANITY_PROJECT_ID": "TODO"
+    "SANITY_PROJECT_ID": "fcu12z7m"
   }
   // Build-Benachrichtigung per ntfy: nach dem Anlegen der Queue «veganrocks-builds» im Dashboard einschalten:
   // "queues": { "consumers": [{ "queue": "veganrocks-builds", "max_batch_size": 10, "max_batch_timeout": 5 }] }

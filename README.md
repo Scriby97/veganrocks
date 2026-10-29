@@ -35,12 +35,14 @@ aus `web/public/preview` (nicht im Repo; Kopie von `material/web`).
 
 ## Einrichtung (einmalig)
 
-1. **Sanity-Projekt** anlegen (Konto von Bettina, Nicolas als Administrator einladen), Project ID eintragen in
-   `studio/sanity.config.ts`, `studio/sanity.cli.ts`, `web/wrangler.jsonc` (`SANITY_PROJECT_ID`) und
-   `web/.env.local` (`NEXT_PUBLIC_SANITY_PROJECT_ID`). CORS-Origin `https://veganrocks.ch` erlauben.
-2. **Startinhalt übertragen:** `cd studio && npx sanity exec scripts/seed.ts --with-user-token`
-   (alle Texte und Bilder der alten Seite; Wartungsmodus an, Passwort «rock»). Überschreibt nichts.
-3. **Studio veröffentlichen:** `cd studio && npm run deploy` → https://veganrocks.sanity.studio
+Sanity-Projekt `fcu12z7m` («Veganrocks», Dataset `production`) im Konto von Nicolas; Bettina wird als Mitglied
+eingeladen (sanity.io/manage → Members). Studio: https://veganrocks.sanity.studio
+
+1. ~~Sanity-Projekt anlegen~~ ✔ 29.10.2026 – Project ID in `studio/sanity.config.ts`, `studio/sanity.cli.ts`,
+   `web/wrangler.jsonc` und `web/.env.local`; CORS für https://veganrocks.ch erlaubt.
+2. ~~Startinhalt übertragen~~ ✔ – `cd studio && npx sanity exec scripts/seed.ts --with-user-token`
+   (8 Seiten, 5 Angebote, Einstellungen, 52 Bilder; Wartungsmodus an, Passwort «rock»). Überschreibt nichts.
+3. ~~Studio veröffentlichen~~ ✔ – neu deployen nach Schema-Änderungen: `cd studio && npm run deploy`
 4. **Web3Forms:** Formular für kitchen@veganrocks.ch anlegen, Access Key → `NEXT_PUBLIC_WEB3FORMS_KEY`
    (Build-Variable in Cloudflare, lokal `web/.env.local`). Web3Forms nimmt Anfragen nur von der hinterlegten
    Website an.
