@@ -4,16 +4,17 @@
 // - leitet Adressen der alten Wix-Seite auf die neuen Seiten um (Google-Treffer, alte Links).
 // - meldet fehlgeschlagene Builds per ntfy (build-notify.ts).
 
-import { buildNotification, sendToNtfy, type BuildEvent } from "./build-notify";
+import { buildNotification, NtfyError, sendToNtfy, type BuildEvent } from "./build-notify";
 
 interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
   SANITY_PROJECT_ID?: string;
   SANITY_WRITE_TOKEN?: string;
   NTFY_TOPIC?: string;
+  NTFY_TOKEN?: string;
 }
 
-type QueueBatch = { messages: { body: unknown; ack(): void; retry(): void }[] };
+type QueueBatch = { messages: { body: unknown; ack(): void; retry(options?: { delaySeconds?: number }): void }[] };
 type SeatsDoc = { _id: string; _rev: string; seats: number; slug: string };
 
 const DATASET = "production";
@@ -52,19 +53,23 @@ const worker = {
   // Build-Ereignisse aus der Queue «veganrocks-builds»
   async queue(batch: QueueBatch, env: Env): Promise<void> {
     for (const message of batch.messages) {
-      const notification = buildNotification(message.body as BuildEvent);
-      console.log("Build-Ereignis:", (message.body as BuildEvent)?.type, notification ? "→ ntfy" : "→ keine Nachricht", env.NTFY_TOPIC ? "" : "(NTFY_TOPIC fehlt)");
+      const event = message.body as BuildEvent;
+      const notification = buildNotification(event);
+      console.log("Build-Ereignis:", event?.type, notification ? "→ ntfy" : "→ keine Nachricht", env.NTFY_TOPIC ? "" : "(NTFY_TOPIC fehlt)");
       if (!notification || !env.NTFY_TOPIC) {
         message.ack();
         continue;
       }
       try {
-        await sendToNtfy(env.NTFY_TOPIC, notification);
+        await sendToNtfy(env.NTFY_TOPIC, notification, env.NTFY_TOKEN);
         message.ack();
         console.log("ntfy: gesendet");
       } catch (error) {
         console.error("ntfy fehlgeschlagen:", String(error));
-        message.retry();
+        // Falsches Topic o. Ä. (4xx) wird nicht besser → aufgeben; Überlastung (429, 5xx, Netz) → in einer Minute nochmals
+        const status = error instanceof NtfyError ? error.status : 0;
+        if (status >= 400 && status < 500 && status !== 429) message.ack();
+        else message.retry({ delaySeconds: 60 });
       }
     }
   },
