@@ -16,9 +16,9 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*", "/home", "/individuellekochkurse", "/teamevent", "/firmenevents", "/food", "/videos", "/wildkr*", "/info", "/medien", "/gutscheine", "/product-page/*"]
   },
+  // Build-Ereignisse aus der Queue «veganrocks-builds» (Event Subscription im Dashboard) → worker/build-notify.ts
+  "queues": { "consumers": [{ "queue": "veganrocks-builds", "max_batch_size": 10, "max_batch_timeout": 5 }] },
   "vars": {
     "SANITY_PROJECT_ID": "fcu12z7m"
   }
-  // Build-Benachrichtigung per ntfy: nach dem Anlegen der Queue «veganrocks-builds» im Dashboard einschalten:
-  // "queues": { "consumers": [{ "queue": "veganrocks-builds", "max_batch_size": 10, "max_batch_timeout": 5 }] }
 }
