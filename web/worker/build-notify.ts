@@ -53,5 +53,6 @@ export async function sendToNtfy(topic: string, n: Notification) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ topic, ...n }),
   });
-  if (!res.ok) throw new Error(`ntfy: ${res.status}`);
+  // Antwort von ntfy ins Log (Worker → Observability), damit man sieht, warum etwas nicht ankommt
+  if (!res.ok) throw new Error(`ntfy: ${res.status} ${(await res.text()).slice(0, 300)}`);
 }

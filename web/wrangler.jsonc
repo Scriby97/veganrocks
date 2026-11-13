@@ -20,5 +20,7 @@
   "queues": { "consumers": [{ "queue": "veganrocks-builds", "max_batch_size": 10, "max_batch_timeout": 5 }] },
   "vars": {
     "SANITY_PROJECT_ID": "fcu12z7m"
-  }
+  },
+  // Logs im Dashboard (Worker → Observability → Logs)
+  "observability": { "enabled": true }
 }

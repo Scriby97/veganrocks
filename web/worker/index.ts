@@ -53,6 +53,7 @@ const worker = {
   async queue(batch: QueueBatch, env: Env): Promise<void> {
     for (const message of batch.messages) {
       const notification = buildNotification(message.body as BuildEvent);
+      console.log("Build-Ereignis:", (message.body as BuildEvent)?.type, notification ? "→ ntfy" : "→ keine Nachricht", env.NTFY_TOPIC ? "" : "(NTFY_TOPIC fehlt)");
       if (!notification || !env.NTFY_TOPIC) {
         message.ack();
         continue;
@@ -60,7 +61,9 @@ const worker = {
       try {
         await sendToNtfy(env.NTFY_TOPIC, notification);
         message.ack();
-      } catch {
+        console.log("ntfy: gesendet");
+      } catch (error) {
+        console.error("ntfy fehlgeschlagen:", String(error));
         message.retry();
       }
     }
