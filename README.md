@@ -71,3 +71,7 @@ Playwright klickt Shop, Gutschein mit Grusstext, Termin mit Platzzahl, Bestellun
 Kontaktanfrage, Menü, Videos und Barrierefreiheit (WCAG 2.1 AA) durch, in Desktop- und Handy-Ansicht, mit festen
 Testdaten (`web/src/lib/e2e-fixtures.ts`). Formulare und `/api/seats` werden abgefangen. Läuft auf GitHub bei
 jedem Push (`.github/workflows/tests.yml`).
+
+## Anleitung für Bettina
+
+`docs/Anleitung-Veganrocks-Website.pdf` ist der PDF-Export von [«So pflegst du die Veganrocks-Website»](https://claude.ai/artifact/SUdqKbo9nDRXAxbPv1xxci). Nach Änderungen am Studio dort nachführen und neu exportieren.
